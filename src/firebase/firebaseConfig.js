@@ -1,17 +1,19 @@
 import { initializeApp } from "firebase/app";
+import { limit } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { IoEllipsisHorizontalCircleOutline } from "react-icons/io5";
+import { MdOutlineJoinLeft } from "react-icons/md";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCEHwnxz99EzQKgQJ810HxYpXPrBwAScF4",
-  authDomain: "mymarket-e0861.firebaseapp.com",
-  projectId: "mymarket-e0861",
-  storageBucket: "mymarket-e0861.appspot.com",
-  messagingSenderId: "357483405494",
-  appId: "1:357483405494:web:31f278e229e72d1042c617",
-  measurementId: "G-H0PEBKQ1QS" 
+  apiKey: "AIzaSyDy-wVbk6QXPjtxKhD_dp1RjKjL5nwa-UI",
+  authDomain: "market-fea67.firebaseapp.com",
+  projectId: "market-fea67",
+  storageBucket: "market-fea67.appspot.com",
+  messagingSenderId: "728075861826",
+  appId: "1:728075861826:web:f17ee796afa167905b52db",
+  measurementId: "G-DHBKGNLZRX"
 };
 
-
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
 
+export const auth = getAuth(app)

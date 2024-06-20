@@ -1,18 +1,18 @@
 import { Outlet } from "react-router-dom";
 
-import Navbar from "../components/header/Header"
-import Footer from "../components/footer/Footer"
-
+// components
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useState } from "react";
 
 function MainLayout() {
   return (
     <>
-     <Navbar/>
-     <main>
-      <Outlet />
+      <Navbar />
+      <main className="d-flex">
+        <Outlet />
       </main>
-     <Footer/>
-     
+      <Footer />
     </>
   );
 }

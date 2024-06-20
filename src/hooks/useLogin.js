@@ -1,26 +1,23 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useGlobalContext } from "./useGlobalContext";
 
+
 function useLogin() {
-    const { dispatch } = useGlobalContext();
+  const { dispatch } = useGlobalContext()
+  const signUpWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user
+      dispatch({type: "LOG_IN", payload: user})
+    } catch (error) {
+      const errorMessage = error.message;
+      alert(errorMessage);
+    }
+  };
 
-    const signInWithGoogle = async () => {
-        const provider = new GoogleAuthProvider();
-
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            dispatch({ type: 'LOG_IN', payload: user });
-            console.log(user);
-            
-        } catch (error) {
-            const errorMessage = error.message;
-            alert(`Error: ${errorMessage}`);
-        }
-    };
-
-    return { signInWithGoogle };
+  return { signUpWithGoogle };
 }
 
-export default useLogin;
+export { useLogin };

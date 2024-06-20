@@ -1,30 +1,52 @@
-// import { useCallback } from "react"
-import { auth } from "../firebase/firebaseConfig"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { useGlobalContext } from "./useGlobalContext"
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../firebase/firebaseConfig";
+
+// function useRegister() {
+//   const registerWithEmailAndPassword = async (userData) => {
+//     console.log(userData);
+//     try {
+//       const result = await createUserWithEmailAndPassword(
+//         auth,
+//         userData.email,
+//         userData.password
+//       );
+//       const userCredential = result.user;
+//       console.log(userCredential);
+//     } catch {}
+//   };
+//   return { registerWithEmailAndPassword };
+// }
+
+// export { useRegister };
+
+
+import { createUserWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
 
 function useRegister() {
-    let { dispatch } = useGlobalContext();
+  const registerWithEmailAndPassword = async (userData) => {
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        userData.email,
+        userData.password
+      );
 
+      await updateProfile(auth.currentUser,{
+        displayName: userData.displayName,
+      })
 
-    let registerWithEmailAndPassword = async (userData) => {
-        try {
-            let result = await createUserWithEmailAndPassword(auth, userData.email, userData.password)
-            await updateProfile(auth.currentUser, {
-                displayName: userData.displayName,
-            })
-            let userCredential = result.user
-            console.log(userCredential);
-
-            dispatch({ type: `LOG_IN`, payload: userCredential });
-
-        } catch (error) {
-            console.log(error.message);
-        }
-        console.log(auth);
+      const userCredential = result.user;
+      dispatch({type:"LOG_IN", payload: userCredential})
+      
+      return { userCredential };
+    } catch (error) {
+      console.error("Error registering user:", error);
+      return { error: error.message };
     }
+  };
 
-    return { registerWithEmailAndPassword }
+  return { registerWithEmailAndPassword };
 }
 
-export { useRegister }
+export { useRegister };

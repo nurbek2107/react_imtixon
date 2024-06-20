@@ -1,36 +1,41 @@
-// react router dom
-import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
-// css
-import "./index.css"
-
-// Layout
-import MainLayout from "./layout/MainLayout"
+// layout
+import MainLayout from "./layout/MainLayout";
 
 // components
-import ProtectedRoutes from "./components/protectrouter/ProtectedRoutes";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
+// pages
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Product from "./pages/Product";
+import Login from "./pages/login";
+import Register from "./pages/register";
 
-// Pages
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import Product from "./pages/Product"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-
-// Global Context
-import { useContext, useEffect } from "react"
+// context
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "./context/GlobalContext";
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "./firebase/firebaseConfig"
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebaseConfig";
+
+//action
+
+import { action as RegisterAction } from "./pages/register";
 
 function App() {
-  let { user, dispatch, isAuthChange } = useContext(GlobalContext);
+  const { user, dispatch, isAuthChange } = useContext(GlobalContext);
 
-  let routes = createBrowserRouter([
+  console.log(user);
+
+  const routes = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: (
         <ProtectedRoutes user={user}>
           <MainLayout />
@@ -42,37 +47,38 @@ function App() {
           element: <Home />,
         },
         {
-          path: '/about',
-          element: <About />
+          path: "about",
+          element: <About />,
         },
         {
-          path: '/contact',
-          element: <Contact />
+          path: "contact",
+          element: <Contact />,
         },
         {
-          path: '/product/:id',
-          element: <Product />
+          path: "product/:id",
+          element: <Product />,
         },
-      ]
+      ],
     },
     {
-      path: `/login`,
+      path: "login",
       element: user ? <Navigate to="/" /> : <Login />,
     },
     {
-      path: `/register`,
+      path: "register",
       element: user ? <Navigate to="/" /> : <Register />,
+      action: RegisterAction
     },
-  ])
+  ]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      dispatch({ type: `LOG_IN`, payload: user });
-      dispatch({ type: `AUTH_CHANGE` })
-    })
-  }, [])
+      dispatch({ type: "LOG_IN", payload: user });
+      dispatch({ type: "AUTH_CHANGE" });
+    });
+  }, []);
 
-  return <>{isAuthChange && <RouterProvider router={routes} />} </>
+  return <>{isAuthChange && <RouterProvider router={routes} />}</>;
 }
 
-export default App
+export default App;

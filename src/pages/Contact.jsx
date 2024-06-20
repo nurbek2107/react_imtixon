@@ -11,10 +11,7 @@ function contact() {
         </p>
         <form action="#" className="space-y-8">
           <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium  "
-            >
+            <label htmlFor="email" className="block mb-2 text-sm font-medium  ">
               Your email
             </label>
             <input
@@ -63,7 +60,7 @@ function contact() {
         </form>
       </div>
     </section>
-  )
+  );
 }
 
-export default contact
+export default contact;
