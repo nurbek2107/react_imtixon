@@ -124,7 +124,7 @@ function Header() {
               </svg>
             </button>
 
-            <div className="dropdown-content z-[1] menu p-2   w-80 -ml-52 mt-10 ">
+            <div className="dropdown-content z-[1] menu p-2   w-80 -ml-64 mt-10 ">
               <div className="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral ">
                 <div className="flex space-x-4 items-center p-4">
                   <div className="flex mr-auto items-center space-x-4">

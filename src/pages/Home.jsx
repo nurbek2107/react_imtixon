@@ -7,13 +7,21 @@ function Home() {
   );
 
   return (
-    <div className="">
+    <div className="container mx-auto">
       {isPending && (
-        <div className="rounded-lg pt-4 max-w-8 mx-auto  fixed inset-0 flex items-center justify-center  z-50">
-          <div className="rounded-md h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>
+        <div className="flex justify-center items-center h-screen">
+          <div className="relative inline-flex">
+            <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+          </div>
         </div>
       )}
-      {error && <div>{error}</div>}
+      {error && (
+        <div className="text-red-500 text-center py-4">
+          Error: {error.message}
+        </div>
+      )}
       {data && <ProductsList products={data.products} />}
     </div>
   );

@@ -24,14 +24,26 @@ import { GlobalContext } from "./context/GlobalContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 
-//action
-
+// action
 import { action as RegisterAction } from "./pages/Register";
 
 function App() {
   const { user, dispatch, isAuthChange } = useContext(GlobalContext);
 
-  console.log(user);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch({ type: "LOG_IN", payload: user });
+      } else {
+        dispatch({ type: "LOG_OUT" });
+      }
+      dispatch({ type: "AUTH_CHANGE" });
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
 
   const routes = createBrowserRouter([
     {
@@ -67,16 +79,9 @@ function App() {
     {
       path: "register",
       element: user ? <Navigate to="/" /> : <Register />,
-      action: RegisterAction
+      action: RegisterAction,
     },
   ]);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      dispatch({ type: "LOG_IN", payload: user });
-      dispatch({ type: "AUTH_CHANGE" });
-    });
-  }, []);
 
   return <>{isAuthChange && <RouterProvider router={routes} />}</>;
 }

@@ -6,7 +6,7 @@ function ProductsList({ products }) {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-10">
+    <div className="flex  flex-wrap justify-center gap-28 ">
       {products.map((product) => (
         <div key={product.id} className="product-container">
           <ProductCard id={product.id} product={product} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function FormInput({ labelText, type, name }) {
   return (
@@ -7,7 +7,7 @@ function FormInput({ labelText, type, name }) {
         <div className="label">
           <span className="label-text">{labelText}</span>
         </div>
-        <input 
+        <input
           type={type}
           name={name}
           placeholder="Type here"

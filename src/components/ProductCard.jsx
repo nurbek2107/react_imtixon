@@ -3,7 +3,7 @@ function ProductCard({ product }) {
   const { id, title, description, thumbnail, price } = product;
 
   return (
-    <div className="card ">
+    <div className="">
       <div className="shadow-2xl rounded-lg p-4 max-w-sm mx-auto ">
         <img
           src={thumbnail}
