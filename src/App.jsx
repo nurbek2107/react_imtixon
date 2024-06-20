@@ -15,8 +15,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Product from "./pages/Product";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 // context
 import { useContext, useEffect } from "react";
@@ -26,7 +26,7 @@ import { auth } from "./firebase/firebaseConfig";
 
 //action
 
-import { action as RegisterAction } from "./pages/register";
+import { action as RegisterAction } from "./pages/Register";
 
 function App() {
   const { user, dispatch, isAuthChange } = useContext(GlobalContext);
