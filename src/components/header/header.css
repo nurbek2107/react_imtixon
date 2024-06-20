@@ -1,0 +1,15 @@
+header{
+    max-width: 1600px;
+    margin: auto;
+    padding: 20px 20px;
+}
+header .center li {
+    transition: all 0.5s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+header .center li:hover {
+text-shadow: 0px 0px 14px rgba(223, 211, 211, 1);
+color: aliceblue;
+}
