@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./footer.css";
 function Footer() {
   return (
-    <div className="flex items-end  mt-20 ">
+    <div className="flex items-end h-lvh ">
       <footer className="footer footer-center p-10 bg-base-200 text-base-content w-full">
         <nav className="grid grid-flow-col gap-4">
           <li>

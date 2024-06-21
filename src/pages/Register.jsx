@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
 import { useRegister } from "../hooks/useRegister";
-import toast from "react-hot-toast";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -48,7 +47,6 @@ function Register() {
           }
         } else {
           setError(null);
-          toast.success(`Welcome ${result.userCredential.displayName}`);
           // Redirect or perform other actions upon successful registration
         }
       }
@@ -67,8 +65,8 @@ function Register() {
           }}
         ></div>
         <div className="w-full p-8 lg:w-1/2">
-          <h2 className="text-2xl font-semibold text-center">Brand</h2>
-          <p className="text-xl text-center">Welcome!</p>
+          <h2 className="text-2xl font-semibold  text-center">Brand</h2>
+          <p className="text-xl  text-center">Welcome!</p>
           <Form method="post">
             {error && (
               <div className="text-red-500 text-center mb-4">{error}</div>
@@ -79,7 +77,11 @@ function Register() {
                 labelText="Display Name:"
                 name="displayName"
               />
-              <FormInput type="url" labelText="Photo URL:" name="photoUrl" />
+              <FormInput
+                type="url"
+                labelText="photo Url:"
+                name="photoUrl"
+              />
             </div>
             <div className="mt-4">
               <FormInput type="email" labelText="Email:" name="email" />
@@ -92,7 +94,7 @@ function Register() {
               />
             </div>
             <button
-              className="btn btn-active font-bold py-2 px-4 w-full rounded mt-8"
+              className=" btn btn-active  font-bold py-2 px-4 w-full rounded  mt-8"
               type="submit"
             >
               Register
@@ -101,7 +103,7 @@ function Register() {
           <button
             type="button"
             onClick={signUpWithGoogle}
-            className="flex items-center justify-center mt-4 rounded-lg shadow-md btn btn-active w-full"
+            className="flex items-center justify-center mt-4  rounded-lg shadow-md btn btn-active w-full  "
           >
             <svg className="h-6 w-6" viewBox="0 0 40 40">
               <path
@@ -125,13 +127,11 @@ function Register() {
               Sign up with Google
             </span>
           </button>
-          {error && (
-            <div className="text-red-500 text-center mt-4">{error}</div>
-          )}
+          {error && <div className=" text-center mt-4">{error}</div>}
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
             <NavLink to="/login" className="text-xs text-gray-500 uppercase">
-              or sign in
+              or sign up
             </NavLink>
             <span className="border-b w-1/5 md:w-1/4"></span>
           </div>

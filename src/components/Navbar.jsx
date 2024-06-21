@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaCartPlus } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa"; // Correct import
+
 import "./Navber.css";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-import { auth } from '../firebase/firebaseConfig';
+import { auth } from "../firebase/firebaseConfig";
 import { signOut } from "firebase/auth";
 
-
 const themeFromLocalStorage = () => {
-  return localStorage.getItem('theme') || 'retro';
+  return localStorage.getItem("theme") || "retro";
 };
 
 function Header() {
-  const { changeTotal, user } = useGlobalContext();
+  const { total, user } = useGlobalContext();
   const { displayName, photoURL, email } = user;
 
   const [theme, setTheme] = useState(themeFromLocalStorage());
@@ -23,23 +23,21 @@ function Header() {
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const logOut = () => {
     if (window.confirm("Are you sure?")) {
-      signOut(auth).then(() => {
-        alert("Successfully logged out.");
-      }).catch((error) => {
-        alert("Error logging out. Please try again.");
-      });
+      signOut(auth)
+        .then(() => {
+          alert("Successfully logged out.");
+        })
+        .catch((error) => {
+          alert("Error logging out. Please try again.");
+        });
     }
   };
-
-
-
-
 
   return (
     <header className="bg-base-200 w-full text-base-content rounded mb-10">
@@ -74,13 +72,15 @@ function Header() {
         </div>
         <div className="right flex items-center gap-6">
           {/* Cart indicator */}
-          <div className="indicator cursor-pointer">
-            <span className="indicator-item badge badge-md badge-secondary">
-              {changeTotal}
-            </span>
-            <FaCartPlus className="w-7 h-7" />
-          </div>
-          {/* Theme switch */}
+          <NavLink to="/Cart">
+            <div className="indicator">
+              <span className="indicator-item badge badge-md badge-secondary">
+                {total}
+              </span>
+              <FaCartPlus className="w-7 h-7" />{" "}
+              {/* Correct usage of FaCartPlus */}
+            </div>
+          </NavLink>
           <label className="swap swap-rotate">
             <input
               onClick={handleTheme}
@@ -124,7 +124,7 @@ function Header() {
               </svg>
             </button>
 
-            <div className="dropdown-content z-[1] menu p-2   w-80 -ml-64 mt-10 ">
+            <div className="dropdown-content z-[1] menu p-2   w-80 -ml-36 mt-10 ">
               <div className="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral ">
                 <div className="flex space-x-4 items-center p-4">
                   <div className="flex mr-auto items-center space-x-4">
@@ -216,7 +216,8 @@ function Header() {
               </div>
             </div>
           </div>
-        </div>
+        </div>{" "}
+        {/* Theme switch */}
       </nav>
     </header>
   );
