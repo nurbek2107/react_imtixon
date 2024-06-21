@@ -77,11 +77,7 @@ function Register() {
                 labelText="Display Name:"
                 name="displayName"
               />
-              <FormInput
-                type="url"
-                labelText="photo Url:"
-                name="photoUrl"
-              />
+              <FormInput type="url" labelText="photo Url:" name="photoUrl" />
             </div>
             <div className="mt-4">
               <FormInput type="email" labelText="Email:" name="email" />

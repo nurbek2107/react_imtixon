@@ -1,11 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { GlobalProvider } from './context/GlobalContext.jsx'
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <GlobalProvider>
-       <App />
-    </GlobalProvider>
-)
+import { Toaster } from "react-hot-toast";
+
+import GlobalContextProvider from "./context/GlobalContext.jsx";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <GlobalContextProvider>
+    <App />
+    <Toaster />
+  </GlobalContextProvider>
+);

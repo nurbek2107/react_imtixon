@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 
-let links = [
+const links = [
   {
     id: 1,
-    text: `Home`,
-    link: `/`,
+    text: "Home",
+    link: "/",
   },
   {
     id: 2,
-    text: `About`,
-    link: `/about`,
+    text: "About",
+    link: "/about",
   },
   {
     id: 3,
-    text: `Contact`,
-    link: `/contact`,
+    text: "Contact",
+    link: "/contact",
   },
 ];
 
@@ -24,14 +24,11 @@ function NavLinks() {
       {links.map((link) => {
         return (
           <li key={link.id}>
-            <Link className="text-xl font-medium" to={link.link}>
-              {link.text}
-            </Link>
+            <Link to={link.link}>{link.text}</Link>
           </li>
         );
       })}
     </>
   );
 }
-
 export default NavLinks;

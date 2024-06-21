@@ -5,9 +5,10 @@ function useGlobalContext() {
   const context = useContext(GlobalContext);
 
   if (!context) {
-    throw new Error("something went wrong use globalcontextptovder");
+    throw new Error(
+      "useGlobalContext() must be in the GlobalContextProvider()"
+    );
   }
-
   return context;
 }
 

@@ -1,8 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { limit } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { IoEllipsisHorizontalCircleOutline } from "react-icons/io5";
-import { MdOutlineJoinLeft } from "react-icons/md";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy-wVbk6QXPjtxKhD_dp1RjKjL5nwa-UI",
@@ -16,4 +13,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app)
+//auth
+export const auth = getAuth(app);

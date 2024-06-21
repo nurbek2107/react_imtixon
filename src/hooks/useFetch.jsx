@@ -1,30 +1,51 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useReducer } from "react";
 
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const changeState = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "IS_PENDING":
+      return { ...state, isPending: payload };
+    case "SET_DATA":
+      return { ...state, data: payload };
+    case "SET_ERROR":
+      return { ...state, error: payload };
+    default:
+      return state;
+  }
+};
+
+function useFetch(url) {
+  const [state, dispatch] = useReducer(changeState, {
+    data: null,
+    isPending: false,
+    error: null,
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
+      dispatch({ type: "IS_PENDING", payload: true });
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        const request = await fetch(url);
+
+        if (!request.ok) {
+          throw new Error("Something went wrong :(");
         }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+
+        const response = await request.json();
+        dispatch({ type: "SET_DATA", payload: response });
+        dispatch({ type: "IS_PENDING", payload: false });
+        dispatch({ type: "SET_ERROR", payload: null });
+      } catch (err) {
+        console.log(err.message);
+        dispatch({ type: "IS_PENDING", payload: false });
+        dispatch({ type: "SET_ERROR", payload: err.message });
       }
     };
 
-    fetchData();
+    getData();
   }, [url]);
 
-  return { data, loading, error };
-};
+  return { ...state };
+}
 
-export default useFetch;
+export { useFetch };
